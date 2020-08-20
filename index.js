@@ -8,11 +8,12 @@ class MyElement extends LitElement {
   _render({ mood }) {
     return html`
       <style>
-        div {background-color: grey}
+        div { background-color: grey; }
+        :host { color: blue; }
       </style>
       <div class="test">
         Web components are <span class="mood">${mood}</span>!<br>
-        <paper-checkbox>Ready to deploy</paper-checkbox>
+        <paper-checkbox style="--paper-checkbox-label-color: red">Ready to deploy</paper-checkbox>
       </div>`;
   }
 }
