@@ -1,21 +1,27 @@
- import {LitElement, html} from '@polymer/lit-element';
- import "@polymer/paper-checkbox/paper-checkbox.js"
+import { LitElement, html } from "@polymer/lit-element";
 
 class MyElement extends LitElement {
+  _didRender() {
+    console.log('did render');
+  }
 
-  static get properties() { return { mood: String }}
+  _firstRendered() {
+    console.log('first rendered');
+    addEventListener("hello", () => {
+      console.log("added event listener");
+    });
+  }
+
+  sayHi() {
+    console.log("Hello");
+    this.dispatchEvent(new CustomEvent("hello", {bubbles:true, composed: true}));
+  }
 
   _render({ mood }) {
     return html`
-      <style>
-        div { background-color: grey; }
-        :host { color: blue; }
-      </style>
-      <div class="test">
-        Web components are <span class="mood">${mood}</span>!<br>
-        <paper-checkbox style="--paper-checkbox-label-color: red">Ready to deploy</paper-checkbox>
-      </div>`;
+      <button on-click="${this.sayHi}">Say HI</button>
+    `;
   }
 }
 
-customElements.define('my-element', MyElement);
+customElements.define("my-element", MyElement);
